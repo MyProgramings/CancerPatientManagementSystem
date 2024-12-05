@@ -1,6 +1,6 @@
 <!-- Button Dark Mode -->
 <button
-        x-cloak x-on:click="darkMode = !darkMode;"
+        x-cloak x-on:click="darkMode = !darkMode; console.log(darkMode)"
         class="inline-flex items-center justify-center p-2 ltr:ml-3 rtl:mr-3 rounded-md text-gray-400">
     <!-- Icon Svg Moon -->
     <svg x-show="!darkMode" class=" w-8 h-8 text-gray-900 hover:text-black"
