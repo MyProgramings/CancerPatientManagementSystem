@@ -4,8 +4,11 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Cache;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
@@ -13,12 +16,13 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens;
-
+    
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -29,6 +33,12 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'username',
+        'role_id',
+        'country_id',
+        'city_id',
+        'last_seen',
+        'profile_photo_path'
     ];
 
     /**
@@ -63,5 +73,32 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function setUsernameAttribute($value)
+    {
+        $this->attributes['username'] = strtolower($value);
+    }
+
+    public function role(): BelongsTo
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    public function hasPermission($key)
+    {
+        return $this->role->permission->contains('key', $key);
+    }
+
+    public function scopeSearch($query, $term){
+        $query->where(function ($query) use ($term){
+            $query->where('username','like', "%$term%")
+                ->orWhere('name','like', "%$term%")
+                ->orWhere('email','like', "%$term%");
+        });
+    }
+
+    public function isOnline(){
+        return Cache::has('user-is-online' .$this->id);
     }
 }

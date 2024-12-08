@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Middleware\Admin;
+use App\Livewire\Admin\Admin\AdminIndex;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -14,4 +16,8 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+});
+
+Route::middleware(['auth', Admin::class])->prefix('admin')->as('admin.')->group(function () {
+    Route::get('/', AdminIndex::class)->name('index');
 });
