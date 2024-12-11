@@ -12,7 +12,7 @@ class UserPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return $user->hasPermission('browse_users');
     }
 
     /**
@@ -20,7 +20,7 @@ class UserPolicy
      */
     public function view(User $user, User $model): bool
     {
-        return false;
+        return $user->hasPermission('read_users');
     }
 
     /**
@@ -28,7 +28,7 @@ class UserPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->hasPermission('add_users');
     }
 
     /**
@@ -36,7 +36,7 @@ class UserPolicy
      */
     public function update(User $user, User $model): bool
     {
-        return false;
+        return $user->hasPermission('edit_users');
     }
 
     /**
@@ -44,7 +44,7 @@ class UserPolicy
      */
     public function delete(User $user, User $model): bool
     {
-        return false;
+        return $user->hasPermission('delete_users');
     }
 
     /**
@@ -52,7 +52,7 @@ class UserPolicy
      */
     public function restore(User $user, User $model): bool
     {
-        return false;
+        return $user->hasPermission('restore_users');
     }
 
     /**
@@ -60,6 +60,6 @@ class UserPolicy
      */
     public function forceDelete(User $user, User $model): bool
     {
-        return false;
+        return $user->hasPermission('forceDelete_users');
     }
 }
