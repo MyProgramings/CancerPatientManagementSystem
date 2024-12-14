@@ -18,10 +18,11 @@ class UserIndex extends Component
     public bool $trashed = false;
     public ?string $role = null;
 
+    
     protected $listeners = [ 'refreshParent' => '$refresh'];
-
+    
     public $readyToLoad = false;
-
+    
     public function loadItems()
     {
         $this->readyToLoad = true;
@@ -55,17 +56,17 @@ class UserIndex extends Component
 
     public function selectedItem($action ,$itemId = null){
         if ($action == 'create'){
-            $this->emit('showCreateModel');
-        }elseif ($action == 'update'){
-            $this->emit('showUpdateModel', $itemId);
-        }elseif ($action == 'show'){
-            $this->emit('showItemModel', $itemId);
-        }elseif ($action == 'delete'){
-            $this->emit('showDeleteModel', $itemId);
-        }elseif ($action == 'restore'){
-            $this->emit('showRestoreModel', $itemId);
-        }elseif ($action == 'forceDelete'){
-            $this->emit('showForceDeleteModel', $itemId);
+            $this->dispatch('showCreateModel');
+        // }elseif ($action == 'update'){
+        //     $this->emit('showUpdateModel', $itemId);
+        // }elseif ($action == 'show'){
+        //     $this->emit('showItemModel', $itemId);
+        // }elseif ($action == 'delete'){
+        //     $this->emit('showDeleteModel', $itemId);
+        // }elseif ($action == 'restore'){
+        //     $this->emit('showRestoreModel', $itemId);
+        // }elseif ($action == 'forceDelete'){
+        //     $this->emit('showForceDeleteModel', $itemId);
         }
     }
 

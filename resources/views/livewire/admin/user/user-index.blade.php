@@ -36,14 +36,14 @@
 
                             <div class="col-span-3 md:col-span-2 lg:col-span-2">
                                 <x-label class="text-xs" for="search" value="{{ __('app.search') }}"/>
-                                <x-input wire:model="term" id="search" type="text" class="block w-full mt-1"
+                                <x-input wire:model.live.debounce.250ms="term" id="search" type="text" class="block w-full mt-1"
                                              autocomplete="off"/>
                             </div>
 
                             <div class="col-span-3 md:col-span-2 lg:col-span-1">
                                 <x-label class="text-xs" for="select"
                                              value="{{ __('app.By') }} {{ __('role.role') }}"/>
-                                <x-select wire:model="role" wire:key="roleTerm" class="mt-1">
+                                <x-select wire:model.live="role" wire:key="roleTerm" class="mt-1">
                                     <option value="">{{ __('app.All') }} {{ __('role.roles') }}</option>
                                     @forelse($roles as $key => $value)
                                         <option value="{{ $key }}">{{ $value }}</option>
@@ -54,13 +54,12 @@
 
                             <div class="col-span-3 md:col-span-2 lg:col-span-1">
                                 <x-label class="text-xs" for="select" value="{{ __('app.OrderBy') }}"/>
-                                <x-select wire:model="orderBy" class="mt-1">
+                                <x-select wire:model.live="orderBy" class="mt-1">
                                     <option value="id">{{ __('app.id') }}</option>
                                     <option value="name">{{ __('user.name') }}</option>
                                     <option value="username">{{ __('user.username') }}</option>
                                     <option value="email">{{ __('user.email') }}</option>
                                     <option value="role_id">{{ __('user.role') }}</option>
-                                    <option value="country_id">{{ __('user.country') }}</option>
                                     @if($trashed)
                                         <option value="deleted_at">{{ __('app.deleted_at') }}</option>
                                     @else
@@ -74,7 +73,7 @@
 
                             <div class="col-span-3 md:col-span-2 lg:col-span-1">
                                 <x-label class="text-xs" for="select" value="{{ __('app.PerPage') }}"/>
-                                <x-select wire:model="perPage" class="mt-1">
+                                <x-select wire:model.live="perPage" class="mt-1">
                                     <option value="10">10</option>
                                     <option value="25">25</option>
                                     <option value="50">50</option>
@@ -83,7 +82,7 @@
 
                             <div class="col-span-3 md:col-span-2 lg:col-span-1">
                                 <x-label class="text-xs" for="select" value="{{ __('app.SortBy') }}"/>
-                                <x-select wire:model="sortBy" class="mt-1">
+                                <x-select wire:model.live="sortBy" class="mt-1">
                                     <option value="asc">{{ __('app.ASC') }}</option>
                                     <option value="desc">{{ __('app.DESC') }}</option>
                                 </x-select>
@@ -91,7 +90,7 @@
 
                             <div class="col-span-3 md:col-span-2 lg:col-span-2">
                                 <x-label class="text-xs" for="trashed" value="{{ __('app.Show Trashed') }}"/>
-                                <x-checkbox wire:model="trashed" value="true" class="block mt-3 w-7 h-7"/>
+                                <x-checkbox wire:model.live="trashed" value="true" class="block mt-3 w-7 h-7"/>
                             </div>
                         </div>
                     </div>
