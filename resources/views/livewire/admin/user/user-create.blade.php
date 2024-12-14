@@ -1,5 +1,5 @@
 <div>
-    <!-- API Token Permissions Modal -->
+    <!-- Create User Modal -->
     <x-dialog-modal wire:model.live="showCreateModel">
         <x-slot name="title">
             {{ __('app.create') }} {{ __('user.user') }}
@@ -45,7 +45,7 @@
 
                     <div class="col-span-1 md:col-span-2">
                         <x-label for="email" value="{{ __('user.email') }}"/>
-                        <x-input wire:model.defer="email" type="text" class="mt-1 block w-full"/>
+                        <x-input wire:model.defer="email" type="email" class="mt-1 block w-full"/>
                         <x-input-error for="email" class="mt-2"/>
                     </div>
 

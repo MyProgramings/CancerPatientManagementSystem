@@ -57,16 +57,16 @@ class UserIndex extends Component
     public function selectedItem($action ,$itemId = null){
         if ($action == 'create'){
             $this->dispatch('showCreateModel');
-        // }elseif ($action == 'update'){
-        //     $this->emit('showUpdateModel', $itemId);
+        }elseif ($action == 'update'){
+            $this->dispatch('showUpdateModel', $itemId);
         // }elseif ($action == 'show'){
-        //     $this->emit('showItemModel', $itemId);
+        //     $this->dispatch('showItemModel', $itemId);
         // }elseif ($action == 'delete'){
-        //     $this->emit('showDeleteModel', $itemId);
+        //     $this->dispatch('showDeleteModel', $itemId);
         // }elseif ($action == 'restore'){
-        //     $this->emit('showRestoreModel', $itemId);
+        //     $this->dispatch('showRestoreModel', $itemId);
         // }elseif ($action == 'forceDelete'){
-        //     $this->emit('showForceDeleteModel', $itemId);
+        //     $this->dispatch('showForceDeleteModel', $itemId);
         }
     }
 
