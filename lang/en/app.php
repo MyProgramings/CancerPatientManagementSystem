@@ -16,6 +16,8 @@ return [
     'search refresh'    => 'Refresh',
     'created_at'        => 'Created At',
     'updated_at'        => 'Updated At',
+    'update'        => 'Update',
+    'delete'        => 'Delete',
     'deleted_at'        => 'Deleted At',
     'Show Trashed'      => 'Show Trashed',
     'DESC'              => 'DESC',
