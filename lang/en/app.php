@@ -18,6 +18,7 @@ return [
     'updated_at'        => 'Updated At',
     'update'        => 'Update',
     'delete'        => 'Delete',
+    'restore'        => 'Restore',
     'deleted_at'        => 'Deleted At',
     'Show Trashed'      => 'Show Trashed',
     'DESC'              => 'DESC',

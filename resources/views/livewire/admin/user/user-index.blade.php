@@ -108,7 +108,6 @@
                                 </th>
                                 <th class="px-2 py-3 text-center">{{ __('user.email') }}</th>
                                 <th class="px-2 py-3 text-center">{{ __('user.role') }}</th>
-                                <th class="px-2 py-3 text-center">{{ __('user.country') }}</th>
                                 <th class="px-2 py-3 text-center">{{ $trashed ? __('app.deleted_at') : __('app.created_at') }}</th>
                                 <th class="px-2 py-3 text-center">{{ __('app.actions') }}</th>
                             </tr>
@@ -127,7 +126,7 @@
                                                      src="{{ $user->profile_photo_url }}"
                                                      alt="..."
                                                 />
-                                                <div class="absolute bottom-0 w-2 h-2 {{ $user->isOnline() ? 'bg-green-500' : 'bg-gray-500' }} rounded-full ltr:left-0 rtl:right-0 ltr:ml-1 rtl:mr-1"></div>
+                                                <div class="absolute bottom-0 w-2 h-2 {{ $user->isOnline() ? 'animate-ping bg-green-500' : 'bg-gray-500' }} rounded-full ltr:left-0 rtl:right-0 ltr:ml-1 rtl:mr-1"></div>
                                                 <div class="absolute inset-0 rounded-full shadow-inner"
                                                      aria-hidden="true"></div>
                                             </div>
@@ -149,13 +148,6 @@
                                             <span class="px-2 py-1 font-semibold line-through leading-tight rounded-full {{ $user->role()->withTrashed()->first()->color }}">
                                             {{ $user->role()->withTrashed()->first()->name }}
                                             </span>
-                                        @endif
-                                    </td>
-                                    <td class="px-2 py-3 text-sm text-center">
-                                        @if($user->country)
-                                            {{ $user->country->name }}
-                                        @elseif($user->country_id)
-                                            <span class="line-through">{{ $user->country()->withTrashed()->first()->name }}</span>
                                         @endif
                                     </td>
                                     <td class="px-2 py-3 text-sm text-center">

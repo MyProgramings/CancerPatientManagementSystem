@@ -3,7 +3,7 @@
         x-cloak x-on:click="darkMode = !darkMode;"
         class="inline-flex items-center justify-center p-2 me-3 rounded-md text-gray-400">
     <!-- Icon Svg Moon -->
-    <svg x-show="!darkMode" class=" w-8 h-8 text-gray-900 hover:text-black"
+    <svg x-show="!darkMode" class=" w-6 h-6 text-gray-900 hover:text-black"
          fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
         <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
     </svg>

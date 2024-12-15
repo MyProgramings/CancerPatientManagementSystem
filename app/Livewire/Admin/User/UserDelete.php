@@ -35,8 +35,46 @@ class UserDelete extends Component
         $this->closeDeleteModel();
         $this->dispatch('refreshParent');
         $this->banner(__('user.delete user'));
-
     }
+
+    public function showRestoreModel($itemId){
+        $this->itemId = $itemId;
+        $this->showRestoreModel = true;
+    }
+
+    public function closeRestoreModel(){
+        $this->showRestoreModel = false;
+        $this->reset();
+    }
+    public function restore(){
+        $user = User::onlyTrashed()->findOrFail($this->itemId);
+        $this->authorize('restore', $user);
+        $user->restore();
+        $this->reset();
+        $this->closeRestoreModel();
+        $this->dispatch('refreshParent');
+        $this->banner(__('user.restore user'));
+    }
+
+    public function showForceDeleteModel($itemid){
+        $this->itemId = $itemid;
+        $this->showForceDeleteModel = true;
+    }
+    public function closeForceDeleteModel(){
+        $this->showForceDeleteModel = false;
+        $this->reset();
+    }
+
+    public function forceDelete(){
+        $user = User::onlyTrashed()->findOrFail($this->itemId);
+        $this->authorize('forceDelete', $user);
+        $user->forceDelete();
+        $this->reset();
+        $this->closeForceDeleteModel();
+        $this->dispatch('refreshParent');
+        $this->banner(__('user.force delete user'));
+    }
+
     public function render()
     {
         return view('livewire.admin.user.user-delete');

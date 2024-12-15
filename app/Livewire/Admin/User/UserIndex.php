@@ -63,10 +63,10 @@ class UserIndex extends Component
             $this->dispatch('showItemModel', $itemId);
         }elseif ($action == 'delete'){
             $this->dispatch('showDeleteModel', $itemId);
-        // }elseif ($action == 'restore'){
-        //     $this->dispatch('showRestoreModel', $itemId);
-        // }elseif ($action == 'forceDelete'){
-        //     $this->dispatch('showForceDeleteModel', $itemId);
+        }elseif ($action == 'restore'){
+            $this->dispatch('showRestoreModel', $itemId);
+        }elseif ($action == 'forceDelete'){
+            $this->dispatch('showForceDeleteModel', $itemId);
         }
     }
 
