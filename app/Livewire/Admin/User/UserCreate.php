@@ -12,12 +12,11 @@ use Livewire\WithFileUploads;
 class UserCreate extends Component
 {
     use WithFileUploads;
+    use InteractsWithBanner;
     
     public $roles;
 
     public $name, $username, $email, $roleId, $password, $password_confirmation, $profilePhotoPath;
-
-    use InteractsWithBanner;
     
     protected $listeners = ['showCreateModel'];
 
