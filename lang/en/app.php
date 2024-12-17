@@ -44,5 +44,6 @@ return [
     'OrderBy'           => 'Order By',
     'SortBy'            => 'Sort By',
     'All'               => 'All',
+    'general'               => 'general',
 
 ];

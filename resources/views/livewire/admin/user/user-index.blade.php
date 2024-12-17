@@ -106,7 +106,7 @@
                                     <span>{{ __('user.name') }}</span>
                                     <span class="text-xx">/ {{ __('user.username') }}</span>
                                 </th>
-                                <th class="px-2 py-3 text-center">{{ __('user.email') }}</th>
+                                <th class="px-2 py-3">{{ __('user.email') }}</th>
                                 <th class="px-2 py-3 text-center">{{ __('user.role') }}</th>
                                 <th class="px-2 py-3 text-center">{{ $trashed ? __('app.deleted_at') : __('app.created_at') }}</th>
                                 <th class="px-2 py-3 text-center">{{ __('app.actions') }}</th>
@@ -136,7 +136,7 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="px-2 py-3 text-sm text-center lowercase">
+                                    <td class="px-2 py-3 text-sm lowercase">
                                         {{ $user->email }}
                                     </td>
                                     <td class="px-2 py-3 text-xs text-center">

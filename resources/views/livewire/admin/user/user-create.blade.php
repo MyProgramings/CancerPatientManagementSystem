@@ -10,7 +10,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="col-span-1 md:col-span-2 lg:col-span-4">
                         <x-label for="name" value="{{ __('user.name') }}"/>
-                        <x-input wire:model.defer="name" id="name" type="text" class="mt-1 block w-full" />
+                        <x-input wire:model="name" id="name" type="text" class="mt-1 block w-full" />
                         <x-input-error for="name" class="mt-2"/>
                     </div>
 
@@ -39,13 +39,13 @@
 
                     <div class="col-span-1 md:col-span-2">
                         <x-label for="username" value="{{ __('user.username') }}"/>
-                        <x-input wire:model.defer="username" id="username" type="text" class="mt-1 block w-full"/>
+                        <x-input wire:model="username" id="username" type="text" class="mt-1 block w-full"/>
                         <x-input-error for="username" class="mt-2"/>
                     </div>
 
                     <div class="col-span-1 md:col-span-2">
                         <x-label for="email" value="{{ __('user.email') }}"/>
-                        <x-input wire:model.defer="email" id="email" type="email" class="mt-1 block w-full"/>
+                        <x-input wire:model="email" id="email" type="email" class="mt-1 block w-full"/>
                         <x-input-error for="email" class="mt-2"/>
                     </div>
 
@@ -64,13 +64,13 @@
 
                     <div class="col-span-1 md:col-span-2">
                         <x-label for="password" value="{{ __('user.password') }}"/>
-                        <x-input wire:model.defer="password" type="password" class="mt-1 block w-full"/>
+                        <x-input wire:model="password" type="password" class="mt-1 block w-full"/>
                         <x-input-error for="password" class="mt-2"/>
                     </div>
 
                     <div class="col-span-1 md:col-span-2">
                         <x-label for="password_confirmation" value="{{ __('Confirm Password') }}"/>
-                        <x-input wire:model.defer="password_confirmation"
+                        <x-input wire:model="password_confirmation"
                                      class="block mt-1 w-full" type="password"
                                      required autocomplete="new-password"/>
                     </div>
