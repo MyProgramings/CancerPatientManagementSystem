@@ -1,7 +1,7 @@
 <!-- Button Dark Mode -->
 <button
         x-cloak x-on:click="darkMode = !darkMode;"
-        class="inline-flex items-center justify-center me-3 rounded-md text-gray-400">
+        class="inline-flex items-center justify-center me-3 rounded-md text-gray-400" aria-label="Dark Mode">
     <!-- Icon Svg Moon -->
     <svg x-show="!darkMode" class=" w-6 h-6 text-white hover:text-gray-100"
          fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
