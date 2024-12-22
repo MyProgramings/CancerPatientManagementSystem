@@ -8,8 +8,8 @@
 
         <form wire:submit="create" autocomplete="off">
             <x-slot name="content">
-                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
-                    <div class="col-span-2 md:col-span-4 lg:col-span-1 lg:row-span-3 order-last lg:order-none">
+                <div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-8">
+                    <div class="col-span-1 md:col-span-4 lg:col-span-1 lg:row-span-3 lg:order-none">
                         <div class="flex flex-row items-center justify-center">
                             <div class="relative mt-4">
                                 <div class="w-20 h-20 bg-gray-200 dark:bg-gray-700 rounded-full">

@@ -8,13 +8,7 @@
         <form wire:submit="update" autocomplete="off">
             <x-slot name="content">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="col-span-1 md:col-span-2 lg:col-span-4">
-                        <x-label for="name" value="{{ __('user.name') }}"/>
-                        <x-input wire:model.defer="name" id="name" type="text" class="mt-1 block w-full" />
-                        <x-input-error for="name" class="mt-2"/>
-                    </div>
-
-                    <div class="col-span-2 md:col-span-4 lg:col-span-2 lg:row-span-2 order-last lg:order-none">
+                    <div class="col-span-1 md:col-span-4 lg:col-span-2 lg:row-span-2 lg:order-none">
                         <div class="flex flex-row items-center justify-center">
                             <div class="relative mt-4">
                                 <div class="w-24 h-24 bg-gray-200 dark:bg-gray-700 rounded-full">
@@ -36,6 +30,12 @@
                                 <x-input-error for="profilePhotoPath" class="mt-2"/>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="col-span-1 md:col-span-2 lg:col-span-4">
+                        <x-label for="name" value="{{ __('user.name') }}"/>
+                        <x-input wire:model.defer="name" id="name" type="text" class="mt-1 block w-full" />
+                        <x-input-error for="name" class="mt-2"/>
                     </div>
 
                     <div class="col-span-1 md:col-span-2">
