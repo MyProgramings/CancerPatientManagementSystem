@@ -4,9 +4,11 @@ namespace App\Livewire\Admin\User;
 
 use App\Models\Role;
 use App\Models\User;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
 
+#[Title('Users')]
 class UserIndex extends Component
 {
     use WithPagination;
@@ -98,6 +100,6 @@ class UserIndex extends Component
         return view('livewire.admin.user.user-index', [
             'users' => $this->readyToLoad ? $this->getItem() : [],
             'roles' => Role::all()->pluck('name', 'id'),
-        ])->layout('layouts.admin');
+        ]);
     }
 }

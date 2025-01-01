@@ -5,9 +5,11 @@ namespace App\Livewire\Admin\Role;
 use App\Models\Permission;
 use App\Models\Role;
 use Illuminate\Database\Eloquent\Builder;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
 
+#[Title('Roles')]
 class RoleIndex extends Component
 {
     use WithPagination;
@@ -95,6 +97,6 @@ class RoleIndex extends Component
         return view('livewire.admin.role.role-index',[
             'roles' => $this->readyToLoad ? $this->getItem() : [],
             'permissions' => Permission::select('id','name','table_name')->get()
-        ])->layout('layouts.admin');
+        ]);
     }
 }

@@ -21,6 +21,7 @@
     </head>
     <body class="font-sans antialiased">
         <x-banner />
+        <x-toast-alert />
 
         <div class="min-h-screen bg-gray-200 dark:bg-gray-900">
             @include('layouts.nav.admin.navigation-menu')
