@@ -3,16 +3,15 @@
 namespace App\Livewire\Admin\User;
 
 use App\Models\User;
+use App\Traits\ToastAlert;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
-use Laravel\Jetstream\InteractsWithBanner;
 use Livewire\WithFileUploads;
 
 class UserCreate extends Component
 {
-    use WithFileUploads;
-    use InteractsWithBanner;
+    use WithFileUploads, ToastAlert;
     
     public $roles;
 
@@ -70,7 +69,7 @@ class UserCreate extends Component
 
         User::create($data);
         $this->closeCreateModel();
-        $this->banner(__('user.create user'));
+        $this->toast(__('user.create user'));
         $this->dispatch('refreshParent');
     }
 

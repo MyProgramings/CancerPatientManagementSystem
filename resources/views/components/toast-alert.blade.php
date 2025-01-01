@@ -1,13 +1,16 @@
-<div x-data="{ position: 'top-left' }" x-init="window.addEventListener('toast-alert', event => {
-    const toastData = Array.isArray(event.detail) ? event.detail[0] : event.detail;
-    position = toastData.position;
+<div x-data="{ position: 'top-left' }" x-init="if (!window.toastEventListenerRegistered) { 
+        window.toastEventListenerRegistered = true; 
+        window.addEventListener('toast-alert', event => {
+            const toastData = Array.isArray(event.detail) ? event.detail[0] : event.detail;
+            position = toastData.position;
 
-    Alpine.store('toasts').createToast(
-        toastData.message,
-        toastData.type,
-        toastData.timer
-    );
-});
+            Alpine.store('toasts').createToast(
+                toastData.message,
+                toastData.type,
+                toastData.timer
+            );
+        });
+    }
 
 Alpine.store('toasts', {
     counter: 0,
