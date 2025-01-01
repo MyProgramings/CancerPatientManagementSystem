@@ -4,12 +4,12 @@ namespace App\Livewire\Admin\Role;
 
 use App\Models\Permission;
 use App\Models\Role;
-use Laravel\Jetstream\InteractsWithBanner;
+use App\Traits\ToastAlert;
 use Livewire\Component;
 
 class RoleUpdate extends Component
 {
-    use InteractsWithBanner;
+    use ToastAlert;
 
     public $permissions;
     public $itemId;
@@ -72,7 +72,7 @@ class RoleUpdate extends Component
         }
 
         $this->closeUpdateModel();
-        $this->banner(__('role.update role'));
+        $this->toast(__('role.update role'));
         $this->dispatch('refreshParent');
     }
 

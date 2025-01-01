@@ -3,22 +3,20 @@
 namespace App\Livewire\Admin\User;
 
 use App\Models\User;
+use App\Traits\ToastAlert;
 use Illuminate\Support\Facades\Hash;
-use Laravel\Jetstream\InteractsWithBanner;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
 class UserUpdate extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, ToastAlert;
     
     public $roles;
 
     public $itemId;
 
     public $name, $username, $email, $roleId, $password, $password_confirmation, $profilePhotoPath ,$profile_photo_path;
-
-    use InteractsWithBanner;
     
     protected $listeners = ['showUpdateModel'];
 
@@ -85,7 +83,7 @@ class UserUpdate extends Component
 
         User::where('id',$this->itemId)->update($data);
         $this->closeUpdateModel();
-        $this->banner(__('user.update user'));
+        $this->toast(__('user.update user'));
         $this->dispatch('refreshParent');
     }
 
