@@ -2,97 +2,40 @@
 
 namespace App\Livewire\Admin\User;
 
+use App\Livewire\BaseIndex;
 use App\Models\Role;
 use App\Models\User;
 use Livewire\Attributes\Title;
-use Livewire\Component;
-use Livewire\WithPagination;
 
 #[Title('Users')]
-class UserIndex extends Component
+class UserIndex extends BaseIndex
 {
-    use WithPagination;
-    
-    public ?string $term = null;
-    public string $orderBy = 'id';
-    public string $sortBy = 'asc';
-    public int $perPage = 10;
-    public bool $trashed = false;
     public ?string $role = null;
 
-    
-    protected $listeners = [ 'refreshParent' => '$refresh'];
-    
-    public $readyToLoad = false;
-    
-    public function loadItems()
+    public function updatingRole()
     {
-        $this->readyToLoad = true;
-    }
-
-    public function updatingTerm(){
-       $this->resetPage();
-    }
-
-    public function updatingOrderBy(){
         $this->resetPage();
     }
 
-    public function updatingSortBy(){
-        $this->resetPage();
-    }
-
-    public function updatingPerPage(){
-        $this->resetPage();
-    }
-
-    public function updatingTrashed(){
-        $this->resetPage();
-    }
-
-    public function updatingRole(){
-        $this->resetPage();
-    }
-
-
-
-    public function selectedItem($action ,$itemId = null){
-        if ($action == 'create'){
-            $this->dispatch('showCreateModel');
-        }elseif ($action == 'update'){
-            $this->dispatch('showUpdateModel', $itemId);
-        }elseif ($action == 'show'){
-            $this->dispatch('showItemModel', $itemId);
-        }elseif ($action == 'delete'){
-            $this->dispatch('showDeleteModel', $itemId);
-        }elseif ($action == 'restore'){
-            $this->dispatch('showRestoreModel', $itemId);
-        }elseif ($action == 'forceDelete'){
-            $this->dispatch('showForceDeleteModel', $itemId);
-        }
-    }
-
-    public function getItem(){
+    public function getItem()
+    {
         $users = User::query();
-        // * Search
-        if (!empty($this->term)&& $this->term != null){
+
+        if (!empty($this->term)) {
             $users = $users->search(trim($this->term));
         }
-        // * Trashed
-        if ($this->trashed){
+
+        if ($this->trashed) {
             $users = $users->onlyTrashed();
         }
 
         $users = $users->with(['role:id,name,color']);
 
-        if (!empty($this->role)){
-            $users = $users->where('role_id',$this->role);
+        if (!empty($this->role)) {
+            $users = $users->where('role_id', $this->role);
         }
 
-        $users = $users->orderBy($this->orderBy, $this->sortBy)->paginate($this->perPage);
-
-        return $users;
-
+        return $users->orderBy($this->orderBy, $this->sortBy)->paginate($this->perPage);
     }
 
     public function render()

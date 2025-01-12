@@ -2,94 +2,38 @@
 
 namespace App\Livewire\Admin\Role;
 
+use App\Livewire\BaseIndex;
 use App\Models\Permission;
 use App\Models\Role;
 use Illuminate\Database\Eloquent\Builder;
 use Livewire\Attributes\Title;
-use Livewire\Component;
-use Livewire\WithPagination;
 
 #[Title('Roles')]
-class RoleIndex extends Component
+class RoleIndex extends BaseIndex
 {
-    use WithPagination;
-    
-    public ?string $term = null;
-    public string $orderBy = 'id';
-    public string $sortBy = 'asc';
-    public int $perPage = 10;
-    public bool $trashed = false;
     public $permissionSearch;
 
-    
-    protected $listeners = [ 'refreshParent' => '$refresh'];
-    
-    public $readyToLoad = false;
-    
-    public function loadItems()
+    public function getItem()
     {
-        $this->readyToLoad = true;
-    }
-
-    public function updatingTerm(){
-       $this->resetPage();
-    }
-
-    public function updatingOrderBy(){
-        $this->resetPage();
-    }
-
-    public function updatingSortBy(){
-        $this->resetPage();
-    }
-
-    public function updatingPerPage(){
-        $this->resetPage();
-    }
-
-    public function updatingTrashed(){
-        $this->resetPage();
-    }
-
-    public function selectedItem($action ,$itemId = null){
-        if ($action == 'create'){
-            $this->dispatch('showCreateModel');
-        }elseif ($action == 'update'){
-            $this->dispatch('showUpdateModel', $itemId);
-        }elseif ($action == 'show'){
-            $this->dispatch('showItemModel', $itemId);
-        }elseif ($action == 'delete'){
-            $this->dispatch('showDeleteModel', $itemId);
-        }elseif ($action == 'restore'){
-            $this->dispatch('showRestoreModel', $itemId);
-        }elseif ($action == 'forceDelete'){
-            $this->dispatch('showForceDeleteModel', $itemId);
-        }
-    }
-
-    public function getItem(){
         $roles = Role::query();
-        // * Search
-        if (!empty($this->term)&& $this->term != null){
+
+        if (!empty($this->term)) {
             $roles = $roles->search(trim($this->term));
         }
-        // * Trashed
-        if ($this->trashed){
+
+        if ($this->trashed) {
             $roles = $roles->onlyTrashed()->withCount('userTrashed');
-        }else{
+        } else {
             $roles = $roles->withCount('user');
         }
 
-        if ($this->permissionSearch){
-            $roles = $roles->whereHas('permission' ,function (Builder $query){
+        if ($this->permissionSearch) {
+            $roles = $roles->whereHas('permission', function (Builder $query) {
                 $query->where('id', $this->permissionSearch);
             });
         }
 
-        $roles = $roles->orderBy($this->orderBy, $this->sortBy)->paginate($this->perPage);
-
-        return $roles;
-
+        return $roles->orderBy($this->orderBy, $this->sortBy)->paginate($this->perPage);
     }
     
     public function render()

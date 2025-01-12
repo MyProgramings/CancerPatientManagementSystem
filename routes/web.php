@@ -2,6 +2,7 @@
 
 use App\Http\Middleware\Admin;
 use App\Livewire\Admin\Admin\AdminIndex;
+use App\Livewire\Admin\CashReceived\CashReceivedIndex;
 use App\Livewire\Admin\Role\RoleIndex;
 use App\Livewire\Admin\User\UserIndex;
 use Illuminate\Support\Facades\Route;
@@ -9,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/cash-received', CashReceivedIndex::class)->name('cash-received.index');
 
 Route::middleware([
     'auth:sanctum',

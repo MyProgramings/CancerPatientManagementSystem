@@ -15,3 +15,9 @@
         {{ __('role.roles') }}
     </x-nav-link>
 </div>
+
+<div class="hidden space-x-8 sm:-my-px sm:flex sm:ms-10">
+    <x-nav-link href="{{ route('cash-received.index') }}" :active="request()->routeIs('cash-received.index')">
+        {{ __('cashReceived.cashReceived') }}
+    </x-nav-link>
+</div>

@@ -41,5 +41,6 @@ return [
     'select'            => 'إختر',
     'No Data'           => 'لا توجد بيانات',
     'general'           => 'عام',
+    'category'           => 'الفئة',
 
 ];
