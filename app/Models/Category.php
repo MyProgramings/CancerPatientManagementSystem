@@ -18,4 +18,9 @@ class Category extends Model
     {
         return $this->hasMany(CashReceived::class);
     }
+
+    public function currency()
+    {
+      return $this->belongsTo(Currency::class);
+    }
 }
