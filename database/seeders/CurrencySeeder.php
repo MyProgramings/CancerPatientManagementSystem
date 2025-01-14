@@ -15,17 +15,20 @@ class CurrencySeeder extends Seeder
     public function run(): void
     {
         DB::table('currencies')->insert([
-            'name' => "ريال يمني",
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-
-        DB::table('currencies')->insert([
             'name' => "ريال سعودي",
+            'shortcut' => "SAR",
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
         DB::table('currencies')->insert([
             'name' => "دولار امريكي",
+            'shortcut' => "USD",
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('currencies')->insert([
+            'name' => "ريال يمني",
+            'shortcut' => "YER",
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
     }

@@ -21,19 +21,27 @@ class CashReceived extends Model
     {
       return $this->belongsTo(User::class);
     }
+    
+    public function currency()
+    {
+      return $this->belongsTo(Currency::class);
+    }
 
     public function category()
     {
       return $this->belongsTo(Category::class);
     }
 
-    public function currency()
-    {
-      return $this->belongsTo(Currency::class);
-    }
-
-    public function exchangeRate()
-    {
-      return $this->belongsTo(ExchangeRate::class);
-    }
+    public function scopeSearch($query, $term){
+      $query->whereHas('user', function ($query) use ($term) {
+          $query->where('name', 'like', "%$term%")
+          ->orWhere('username','like', "%$term%");
+      })
+      ->orWhereHas('currency', function ($query) use ($term) {
+          $query->where('name', 'like', "%$term%");
+      })
+      ->orWhereHas('category', function ($query) use ($term) {
+          $query->where('name', 'like', "%$term%");
+      });
+  }
 }

@@ -10,7 +10,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/cash-received', CashReceivedIndex::class)->name('cash-received.index');
+Route::get('/cash-received', function () {
+    return view('cash-received');
+});
+
 
 Route::middleware([
     'auth:sanctum',
@@ -26,4 +29,5 @@ Route::middleware(['auth', Admin::class])->prefix('admin')->as('admin.')->group(
     Route::get('/', AdminIndex::class)->name('index');
     Route::get('/user', UserIndex::class)->name('user.index')->can('viewAny', \App\Models\User::class);
     Route::get('/role', RoleIndex::class)->name('role.index')->can('viewAny', \App\Models\Role::class);
+    Route::get('/cash-received', CashReceivedIndex::class)->name('cash-received.index');
 });
