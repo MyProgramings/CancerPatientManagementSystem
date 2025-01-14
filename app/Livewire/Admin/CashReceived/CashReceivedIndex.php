@@ -57,7 +57,7 @@ class CashReceivedIndex extends BaseIndex
                 $join->on('exchange_rates.currency_id', '=', 'latest.currency_id')
                     ->on('exchange_rates.created_at', '=', 'latest.max_date');
             })
-            ->with('currency:id,name')
+            ->with('currency:id,name,shortcut')
             ->get(),
             'currencies' => Currency::all()->pluck('name', 'id'),
         ]);

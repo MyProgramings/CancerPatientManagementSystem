@@ -200,7 +200,7 @@
 }
 @layer utilities {
     .news-ticker {
-        @apply bg-gray-100 overflow-hidden whitespace-nowrap py-2 relative;
+        @apply bg-gray-100 overflow-hidden whitespace-nowrap relative;
         will-change: transform;
     }
 
