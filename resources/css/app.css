@@ -199,42 +199,47 @@
     /*------- end svg toast alert ---------*/
 }
 @layer utilities {
-    /* تنسيق الـ News Ticker */
     .news-ticker {
         @apply bg-gray-100 overflow-hidden whitespace-nowrap py-2 relative;
-        will-change: transform; /* تحسين الأداء أثناء التمرير */
+        will-change: transform;
     }
 
-    /* تنسيق المحتوى */
     .ticker-content {
         @apply font-bold text-gray-700 text-sm;
-        animation: scroll 20s linear infinite;
+        animation: scroll-left 20s linear infinite;
         animation-play-state: running;
     }
 
     @media (max-width: 768px) {
         .ticker-content {
             @apply inline-block;
+            animation: scroll-mobile 15s linear infinite;
         }
     }
 
-    /* عند التمرير بالماوس */
     .news-ticker:hover .ticker-content {
         animation-play-state: paused;
     }
 
-    /* تنسيق العناصر */
     .ticker-item {
         @apply inline-block px-6 py-2;
     }
 }
 
-/* حركة التمرير */
-@keyframes scroll {
+@keyframes scroll-left {
     0% {
-        transform: translateX(100%);
+        transform: translateX(-100%);
     }
     100% {
-        transform: translateX(-100%);
+        transform: translateX(60%);
+    }
+}
+
+@keyframes scroll-mobile {
+    0% {
+        transform: translateX(-60%);
+    }
+    100% {
+        transform: translateX(100%);
     }
 }
