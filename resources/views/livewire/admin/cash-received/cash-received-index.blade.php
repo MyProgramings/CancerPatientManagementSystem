@@ -4,10 +4,9 @@
             <div class="ticker-content">
                 @foreach ($exchange_rates as $rate)
                     <div class="ticker-item">
-                        <img src="{{ asset('dolar_s.png') }}" width="40px" style="float: right;" alt=""> 
-                        {{ $rate->currency->name }}: 
-                        <span class="text-green-500"> البيع: {{ $rate->Sell }}</span> | 
-                        <span class="text-red-500"> الشراء: {{ $rate->Buy }}</span>
+                        {{ $rate->currency->shortcut }}: 
+                        <span class="text-green-700"> البيع: {{ $rate->Sell }}</span> | 
+                        <span class="text-red-700"> الشراء: {{ $rate->Buy }}</span>
                     </div>
                 @endforeach
             </div>
