@@ -1,18 +1,17 @@
 <div wire:init="loadItems">
     <header class="bg-white dark:bg-gray-800 shadow">
-        <div class="max-w-7xl mx-auto">
-            <div class="news-ticker">
-                <div class="ticker-content">
-                    @foreach ($exchange_rates as $rate)
-                        <div class="ticker-item">
-                            {{ $rate->currency->name }}: 
-                            <span class="text-green-500">سعر البيع: {{ $rate->Sell }}</span> | 
-                            <span class="text-red-500">سعر الشراء: {{ $rate->Buy }}</span>
-                        </div>
-                    @endforeach
-                </div>
-            </div>                     
-        </div>
+        <div class="news-ticker">
+            <div class="ticker-content">
+                @foreach ($exchange_rates as $rate)
+                    <div class="ticker-item">
+                        <img src="{{ asset('dolar_s.png') }}" width="40px" style="float: right;" alt=""> 
+                        {{ $rate->currency->name }}: 
+                        <span class="text-green-500"> البيع: {{ $rate->Sell }}</span> | 
+                        <span class="text-red-500"> الشراء: {{ $rate->Buy }}</span>
+                    </div>
+                @endforeach
+            </div>
+        </div>                     
     </header>    
 
     <div class="py-4">
