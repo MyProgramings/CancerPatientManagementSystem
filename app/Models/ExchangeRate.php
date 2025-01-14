@@ -15,8 +15,8 @@ class ExchangeRate extends Model
         'Buy',
     ];
 
-    public function exchangeRates()
+    public function currency()
     {
-        return $this->hasMany(ExchangeRate::class);
+      return $this->belongsTo(Currency::class);
     }
 }

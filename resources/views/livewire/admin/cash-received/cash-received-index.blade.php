@@ -1,12 +1,22 @@
 <div wire:init="loadItems">
-    <x-slot name="header">
-        <h2 class="text-xl font-semibold leading-tight text-primary-700 dark:text-primary-400">
-            {{ __('cashReceived.cashReceived') }}
-        </h2>
-    </x-slot>
+    <header class="bg-white dark:bg-gray-800 shadow">
+        <div class="max-w-7xl mx-auto">
+            <div class="news-ticker">
+                <div class="ticker-content">
+                    @foreach ($exchange_rates as $rate)
+                        <div class="ticker-item">
+                            {{ $rate->currency->name }}: 
+                            <span class="text-green-500">سعر البيع: {{ $rate->Sell }}</span> | 
+                            <span class="text-red-500">سعر الشراء: {{ $rate->Buy }}</span>
+                        </div>
+                    @endforeach
+                </div>
+            </div>                     
+        </div>
+    </header>    
 
-    <div class="py-12">
-        <div class="pr-0 mx-auto max-w-7xl sm:px-6 lg:px-8">
+    <div class="py-4">
+        <div class="pr-0 mx-auto max-w-7xl">
             <div class="p-5 overflow-hidden text-gray-800 shadow-xl lg:px-0 sm:px-10 bg-gray-50 sm:rounded-lg lg:rounded-3xl dark:bg-gray-800 dark:text-gray-400">
                 <div class="flex flex-wrap items-center">
                     <div class="relative flex-row flex-1 w-full max-w-full px-4">
@@ -27,15 +37,33 @@
 
                             <div class="col-span-3 md:col-span-2 lg:col-span-2">
                                 <x-label class="text-xs" for="search" value="{{ __('app.search') }}"/>
-                                <x-input wire:model.live.debounce.250ms="term" id="search" type="text" class="block w-full mt-1"
+                                <x-input wire:model.live="term" id="search" type="text" class="block w-full mt-1"
                                              autocomplete="off"/>
                             </div>
 
                             <div class="col-span-3 md:col-span-2 lg:col-span-1">
                                 <x-label class="text-xs" for="select"
-                                             value="{{ __('app.By') }} {{ __('role.role') }}"/>
-                                <x-select wire:model.live="role" wire:key="roleTerm" class="mt-1">
-                                    <option value="">{{ __('app.All') }} {{ __('role.roles') }}</option>
+                                             value="{{ __('app.By') }} {{ __('cashReceived.currency') }}"/>
+                                <x-select wire:model.live="currency" wire:key="currencyTerm" class="mt-1">
+                                    <option value="">{{ __('app.All') }} {{ __('cashReceived.currencies') }}</option>
+                                    @forelse($currencies as $key => $value)
+                                        <option value="{{ $key }}">{{ $value }}</option>
+                                    @empty
+                                    @endforelse
+                                </x-select>
+                            </div>
+
+                            <div class="col-span-3 md:col-span-2 lg:col-span-1">
+                                <x-label class="text-xs" for="select" value="{{ __('app.By') }} {{ __('cashReceived.category') }}" />
+                                <x-select wire:model.live="categorySearch" wire:key="categorySearch" class="mt-1">
+                                    <option value="">{{ __('app.All') }} {{ __('cashReceived.categories') }}</option>
+                                    @foreach ($categories->groupBy('currency_id') as $currency_id => $groupedCategories)
+                                        <optgroup label="{{ $groupedCategories->first()->currency->name ?? __('app.general') }}">
+                                            @foreach ($groupedCategories as $category)
+                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                            @endforeach
+                                        </optgroup>
+                                    @endforeach
                                 </x-select>
                             </div>
 
@@ -43,11 +71,9 @@
                                 <x-label class="text-xs" for="select" value="{{ __('app.OrderBy') }}"/>
                                 <x-select wire:model.live="orderBy" class="mt-1">
                                     <option value="id">{{ __('app.id') }}</option>
-                                    <option value="name">{{ __('user.name') }}</option>
-                                    <option value="username">{{ __('user.username') }}</option>
-                                    <option value="email">{{ __('user.email') }}</option>
-                                    <option value="role_id">{{ __('user.role') }}</option>
-                                    <option value="last_seen">{{ __('user.last_seen') }}</option>
+                                    {{-- <option value="username">{{ __('user.username') }}</option> --}}
+                                    <option value="currency_id">{{ __('cashReceived.currency') }}</option>
+                                    <option value="category_id">{{ __('cashReceived.category') }}</option>
                                     <option value="created_at">{{ __('app.created_at') }}</option>
                                     <option value="updated_at">{{ __('app.updated_at') }}</option>
                                 </x-select>
@@ -65,8 +91,8 @@
                             <div class="col-span-3 md:col-span-2 lg:col-span-1">
                                 <x-label class="text-xs" for="select" value="{{ __('app.SortBy') }}"/>
                                 <x-select wire:model.live="sortBy" class="mt-1">
-                                    <option value="asc">{{ __('app.ASC') }}</option>
                                     <option value="desc">{{ __('app.DESC') }}</option>
+                                    <option value="asc">{{ __('app.ASC') }}</option>
                                 </x-select>
                             </div>
                         </div>
@@ -82,8 +108,8 @@
                                 <th class="px-4 py-3">{{ __('user.username') }}</th>
                                 <th class="px-2 py-3">{{ __('cashReceived.currency') }}</th>
                                 <th class="px-2 py-3 text-center">{{ __('app.category') }}</th>
-                                <th class="px-2 py-3 text-center">{{ __('العدد') }}</th>
-                                <th class="px-2 py-3 text-center">{{ __('الاجمالي') }}</th>
+                                <th class="px-2 py-3 text-center">{{ __('cashReceived.amount') }}</th>
+                                <th class="px-2 py-3 text-center">{{ __('cashReceived.total') }}</th>
                                 <th class="px-2 py-3 text-center">{{ __('app.created_at') }}</th>
                                 <th class="px-2 py-3 text-center">{{ __('app.actions') }}</th>
                             </tr>
@@ -109,7 +135,7 @@
                                         {{ $cash_received->amount }}
                                     </td>
                                     <td class="px-2 py-3 text-sm text-center">
-                                        {{ $cash_received->total }}
+                                        {{ $cash_received->total }} {{ $cash_received->currency->shortcut ?? 'USD' }}
                                     </td>
                                     <td class="px-2 py-3 text-sm text-center">
                                         {{ $cash_received->created_at->diffForHumans() }}

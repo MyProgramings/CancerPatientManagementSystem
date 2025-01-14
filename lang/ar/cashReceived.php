@@ -3,6 +3,9 @@
 return [
     'cashReceived' => 'النقدية المستلمة',
     'currency' => 'العملة',
+    'currencies' => 'العملات',
+    'category' => 'الفئة',
+    'categories' => 'الفئات',
     'amount' => 'العدد',
     'total' => 'الإجمالي',
 

@@ -11,7 +11,7 @@ abstract class BaseIndex extends Component
 
     public ?string $term = null;
     public string $orderBy = 'id';
-    public string $sortBy = 'asc';
+    public string $sortBy = 'desc';
     public int $perPage = 10;
     public bool $trashed = false;
     public $readyToLoad = false;

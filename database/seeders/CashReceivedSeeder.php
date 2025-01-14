@@ -16,10 +16,10 @@ class CashReceivedSeeder extends Seeder
     {
         DB::table('cash_receiveds')->insert([
             'user_id' => 1,
-            'currency_id' => 2,
+            'currency_id' => 1,
             'category_id' => 1,
             'amount' => 4,
-            'total' => 4000,
+            'total' => 2000,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
     }
