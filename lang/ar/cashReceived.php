@@ -8,6 +8,7 @@ return [
     'categories' => 'الفئات',
     'amount' => 'العدد',
     'total' => 'الإجمالي',
+    'transformation' => 'تحويلها',
 
     'create cash Received'           => 'تم تسجيل النقدية بنجاح',
     'update cash Received'           => 'تم تحديث النقدية بنجاح',

@@ -15,6 +15,7 @@ class CashReceived extends Model
         'category_id',
         'amount',
         'total',
+        'description',
     ];
 
     public function user()

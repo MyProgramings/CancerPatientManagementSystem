@@ -16,6 +16,7 @@
         }
         th, td {
             border: 1px solid #000;
+            border-style: dashed;
             padding: 8px;
             text-align: center;
         }

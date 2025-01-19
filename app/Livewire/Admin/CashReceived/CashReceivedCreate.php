@@ -20,6 +20,7 @@ class CashReceivedCreate extends Component
     public $currency_id;
     public $amount;
     public $total;
+    public $description;
 
     protected $listeners = ['showCreateModel'];
 
@@ -32,6 +33,7 @@ class CashReceivedCreate extends Component
             'currency_id' => 'required',
             'amount' => 'required',
             'total' => 'required',
+            'description' => 'nullable',
         ];
     }
 
@@ -81,15 +83,9 @@ class CashReceivedCreate extends Component
 
     public function create()
     {
-        $this->validate();
+        $data = $this->validate();
 
-        $data = [
-            'user_id' => 1,
-            'currency_id' => $this->currency_id,
-            'category_id' => $this->category_id,
-            'amount' => $this->amount,
-            'total' => $this->total,
-        ];
+        $data['user_id'] = 1;
 
         CashReceived::create($data);
         $this->closeCreateModel();

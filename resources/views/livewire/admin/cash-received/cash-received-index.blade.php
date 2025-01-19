@@ -1,12 +1,12 @@
 <div wire:init="loadItems">
     <header class="bg-white dark:bg-gray-800 shadow">
-        <div class="news-ticker">
+        <div class="news-ticker dark:bg-gray-700">
             <div class="ticker-content">
                 @foreach ($exchange_rates as $rate)
-                    <div class="ticker-item">
+                    <div class="ticker-item dark:text-gray-100">
                         {{ $rate->currency->shortcut }}: 
-                        <span class="text-green-700"> البيع: {{ $rate->Sell }}</span> | 
-                        <span class="text-red-700"> الشراء: {{ $rate->Buy }}</span>
+                        <span class="text-green-700 dark:text-green-500"> البيع: {{ $rate->Sell }}</span> | 
+                        <span class="text-red-700 dark:text-red-500"> الشراء: {{ $rate->Buy }}</span>
                     </div>
                 @endforeach
             </div>
@@ -69,7 +69,6 @@
                                 <x-label class="text-xs" for="select" value="{{ __('app.OrderBy') }}"/>
                                 <x-select wire:model.live="orderBy" class="mt-1">
                                     <option value="id">{{ __('app.id') }}</option>
-                                    {{-- <option value="username">{{ __('user.username') }}</option> --}}
                                     <option value="currency_id">{{ __('cashReceived.currency') }}</option>
                                     <option value="category_id">{{ __('cashReceived.category') }}</option>
                                     <option value="created_at">{{ __('app.created_at') }}</option>
@@ -103,11 +102,12 @@
                             <thead>
                             <tr class="text-sm font-semibold text-gray-500 border-y ltr:text-left rtl:text-right dark:border-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-700/30">
                                 <th class="w-10 px-2 py-3 text-center">{{ __('app.id') }}</th>
-                                <th class="px-4 py-3">{{ __('user.username') }}</th>
-                                <th class="px-2 py-3">{{ __('cashReceived.currency') }}</th>
-                                <th class="px-2 py-3 text-center">{{ __('app.category') }}</th>
+                                <th class="px-2 py-3 text-right">{{ __('user.username') }}</th>
+                                <th class="px-2 py-3 text-right">{{ __('cashReceived.currency') }}</th>
+                                <th class="px-2 py-3 text-right">{{ __('app.category') }}</th>
                                 <th class="px-2 py-3 text-center">{{ __('cashReceived.amount') }}</th>
-                                <th class="px-2 py-3 text-center">{{ __('cashReceived.total') }}</th>
+                                <th class="px-2 py-3 text-left">{{ __('cashReceived.total') }}</th>
+                                <th class="px-2 py-3 text-left">{{ __('cashReceived.transformation') }}</th>
                                 <th class="px-2 py-3 text-center">{{ __('app.created_at') }}</th>
                                 <th class="px-2 py-3 text-center">{{ __('app.actions') }}</th>
                             </tr>
@@ -118,13 +118,13 @@
                                     <td class="px-2 py-3 text-center text-xx">
                                         {{ $cash_received->id }}
                                     </td>
-                                    <td class="px-4 py-3">
+                                    <td class="px-2 py-3 text-right">
                                         {{ $cash_received->user->name }}
                                     </td>
-                                    <td class="px-4 py-3">
+                                    <td class="px-2 py-3 text-right">
                                         {{ $cash_received->currency->name }}
                                     </td>
-                                    <td class="px-4 py-3">
+                                    <td class="px-2 py-3 text-right">
                                         @isset($cash_received->category)
                                             {{ $cash_received->category->name }}
                                         @endisset
@@ -132,8 +132,14 @@
                                     <td class="px-2 py-3 text-sm text-center">
                                         {{ $cash_received->amount }}
                                     </td>
-                                    <td class="px-2 py-3 text-sm text-center">
+                                    <td class="px-2 py-3 text-sm text-left">
                                         {{ $cash_received->total }} {{ $cash_received->currency->shortcut ?? 'USD' }}
+                                    </td>
+                                    <td class="px-2 py-3 text-sm text-left">
+                                        @php
+                                            $sellRate = $exchange_rates->firstWhere('currency.shortcut', $cash_received->currency->shortcut)?->Sell ?? 1;
+                                        @endphp
+                                        {{ $cash_received->total * $sellRate }} {{ 'YER' }}
                                     </td>
                                     <td class="px-2 py-3 text-sm text-center">
                                         {{ $cash_received->created_at->diffForHumans() }}
