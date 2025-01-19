@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->integer('amount');
             $table->integer('total');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
